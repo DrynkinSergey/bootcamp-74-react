@@ -1,6 +1,11 @@
-const Button = ({ children }) => {
-  const outlined = 'class 4, class2';
+import styles from './Button.module.css';
 
-  return <button>{children}</button>;
+const Button = ({ children, variant = 'primary', size = 'medium', disabled = false, className }) => {
+  return (
+    <button className={`${styles.button} ${styles[variant]} ${styles[size]} ${className}`} disabled={disabled}>
+      {children}
+    </button>
+  );
 };
+
 export default Button;
