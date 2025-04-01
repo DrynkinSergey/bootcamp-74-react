@@ -13,8 +13,8 @@ const App = () => {
       <h2 className='title'>Стилізація в React</h2>
       <hr />
       <section>
-        <Message text='Test text props' isOnline />
-        <Message author='Taras' isOnline />
+        <Message variant='new' text='Test text props' isOnline />
+        <Message variant='old' author='Taras' isOnline />
         <Message author='Alla' text='Test text props' />
       </section>
       <hr />

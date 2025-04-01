@@ -1,5 +1,10 @@
 $green: green;
 
+:root {
+  --color-red: red;
+  --size-xl: 20px;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
