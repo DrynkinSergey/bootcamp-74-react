@@ -3,6 +3,9 @@
   border-radius: 0.375rem;
   font-size: 1rem;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap:10px;
   transition: background-color 0.2s;
   cursor: pointer;
   outline: none;
@@ -40,6 +43,10 @@
 }
 .success:hover {
   background-color: #059669;
+}
+.dark{
+  background-color: black;
+  color:white
 }
 
 .outline {
