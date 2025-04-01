@@ -3,8 +3,10 @@ import Message from './components/message/Message';
 import Todolist from './components/todolist/Todolist';
 import Profile from './components/profile/Profile';
 import s from './App.module.css';
-import profile from './assets/user.json';
 import todos from './assets/todos.json';
+import img from './assets/image.png';
+import userProfile from './assets/user.json';
+
 const App = () => {
   const counter = 1;
   const message = `This is test ${counter} message`;
@@ -20,7 +22,7 @@ const App = () => {
         <Message author='Alla' text='Test text props' />
       </section>
       <hr />
-      <Profile data={profile} />
+      <Profile {...userProfile} />
       <hr />
       <Todolist data={todos} />
 
@@ -29,6 +31,7 @@ const App = () => {
         <div className={s.boxRed}></div>
         <div className={s.box}></div>
       </div>
+      <img src={img} alt='' />
     </section>
   );
 };
