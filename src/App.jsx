@@ -6,8 +6,10 @@ import s from './App.module.css';
 import profile from './assets/user.json';
 import todos from './assets/todos.json';
 const App = () => {
+  const counter = 1;
+  const message = `This is test ${counter} message`;
   return (
-    <>
+    <section>
       <Header />
       <hr />
       <h2 className='title'>Стилізація в React</h2>
@@ -27,7 +29,7 @@ const App = () => {
         <div className={s.boxRed}></div>
         <div className={s.box}></div>
       </div>
-    </>
+    </section>
   );
 };
 
