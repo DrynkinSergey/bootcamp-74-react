@@ -10,7 +10,7 @@ const App = () => {
     <>
       <Header />
       <hr />
-      <h2>Стилізація в React</h2>
+      <h2 className='title'>Стилізація в React</h2>
       <hr />
       <section>
         <Message text='Test text props' isOnline />
