@@ -1,14 +1,9 @@
 const Header = () => {
   return (
-    <header className='header'>
-      <div>Logo</div>
-      <ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Posts</li>
-      </ul>
+    <header>
+      <h2>State, Events</h2>
+      <h2>Module 2 Part 1</h2>
     </header>
   );
 };
-
 export default Header;

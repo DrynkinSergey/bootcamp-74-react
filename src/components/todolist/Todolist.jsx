@@ -1,16 +1,18 @@
-const Todolist = ({ data }) => {
+import todosData from '../../assets/todos.json';
+import { TodoItem } from './TodoItem';
+import s from './TodoList.module.css';
+export const TodoList = () => {
   return (
-    <section>
-      <h2>Todos</h2>
-      <ul>
-        {data.map((item, idx) => (
-          <li key={idx}>
-            <p>{item.todo}</p>
-            <button>Remove</button>
-          </li>
+    <div>
+      <div className='flex'>
+        <input className={s.input} />
+        <button className='btn border'>Add</button>
+      </div>
+      <ul className={s.list}>
+        {todosData.map(item => (
+          <TodoItem key={item.id} {...item} />
         ))}
       </ul>
-    </section>
+    </div>
   );
 };
-export default Todolist;
