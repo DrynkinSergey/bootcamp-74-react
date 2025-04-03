@@ -9,7 +9,6 @@ const Voting = () => {
   });
 
   const handleOptionClick = targetOption => {
-    console.log(targetOption);
     setOptions({ ...options, [targetOption]: options[targetOption] + 1 });
 
     // if (option === 'windows') {
