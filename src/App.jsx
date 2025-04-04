@@ -13,12 +13,12 @@ const App = () => {
     <>
       <Header />
       <button onClick={openModal}>Open modal</button>
-      {/* {isOpen && (
+      {isOpen && (
         <Modal closeModal={closeModal}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae ad, distinctio perferendis laudantium hic molestiae illo ut totam
           voluptas aut iusto tenetur eum. Dicta praesentium adipisci distinctio quisquam doloribus minus!
         </Modal>
-      )} */}
+      )}
       {/* <Counter /> */}
       <TodoList />
       {/* <Products /> */}

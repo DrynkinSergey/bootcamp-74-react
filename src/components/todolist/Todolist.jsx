@@ -47,6 +47,7 @@ export const TodoList = () => {
     const newData = todos.filter(item => !item.completed);
     setTodos(newData);
   };
+
   return (
     <div>
       <div className='flex'>
