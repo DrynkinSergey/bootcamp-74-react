@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import s from './Counter.module.css';
 
 export const Counter = () => {
@@ -9,6 +9,25 @@ export const Counter = () => {
   // 2. Хуки мають бути викликані тільки в верхньому скоупі ( після оголошення функції при відкритті її тіла)
   // 3. Не можна оголошувати хуки всередині циклів, умов, функцій які знаходяться в компоненті і після return
 
+  // 1. Спрацьовує тільки один раз при монтуванні (коли людина потрапляє до вас у додаток або оновлює сторінку)
+  useEffect(() => {
+    console.log('Етап монтування тільки один раз!');
+  }, []);
+  // Виконається ПЕРШИЙ раз і всі наступні, коли міняється лічильник!
+  useEffect(() => {
+    console.log('Етап оновлення лічильника. Новий стан:', counter);
+  }, [counter]);
+
+  // Виконається ПЕРШИЙ раз і всі наступні, коли ми поміняємо крок!
+  useEffect(() => {
+    console.log('Етап оновлення кроку. Новий стан:', step);
+  }, [step]);
+
+  // Виконання йде кожен раз коли міняється щось з залежностей а також ПЕРШИЙ раз
+  useEffect(() => {
+    console.log('Етап оновлення кроку. Було змінено або крок, або лічильник:', step, counter);
+  }, [step, counter]);
+
   const handleMinusClick = () => {
     if (counter <= 0) {
       return;
@@ -17,7 +36,7 @@ export const Counter = () => {
   };
   const handlePlusClick = () => {
     setCounter(counter + step);
-    console.log(counter);
+    // console.log(counter);
   };
 
   const handleResetClick = () => {
