@@ -4,8 +4,4 @@ import 'modern-normalize';
 import './styles.scss';
 import { StrictMode } from 'react';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+createRoot(document.getElementById('root')).render(<App />);
