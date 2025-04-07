@@ -1,26 +1,38 @@
 import { useState } from 'react';
 import s from './Forms.module.css';
+const INITIAL_VALUES = {
+  username: '',
+  email: '',
+  age: '',
+  about: '',
+  specification: '',
+  level: 'junior',
+  agree: false,
+  rules: false,
+  technologies: '',
+};
 const ApplyForm = () => {
-  const [applyFormData, setApplyFormData] = useState({
-    username: '',
-    email: '',
-    age: '',
-    about: '',
-    specification: '',
-    level: 'junior',
-    agree: false,
-    rules: false,
-  });
+  const [applyFormData, setApplyFormData] = useState(INITIAL_VALUES);
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(applyFormData);
+    console.log({ ...applyFormData });
+    setApplyFormData(INITIAL_VALUES);
   };
+
   const handleChangeInput = e => {
     const { name, value, type, checked } = e.target;
+    if (name === 'technologies') {
+      return setApplyFormData({
+        ...applyFormData,
+        technologies: {
+          ...applyFormData.technologies,
+          [value]: checked,
+        },
+      });
+    }
     if (type === 'checkbox') {
       return setApplyFormData({ ...applyFormData, [name]: checked });
     }
-
     setApplyFormData({ ...applyFormData, [name]: value });
   };
   return (
@@ -66,6 +78,20 @@ const ApplyForm = () => {
             <span>Senior</span>
           </label>
         </div>
+        <div>
+          <label>
+            <input type='checkbox' value='css' onChange={handleChangeInput} name='technologies' />
+            <span>CSS</span>
+          </label>
+          <label>
+            <input type='checkbox' value='js' onChange={handleChangeInput} name='technologies' />
+            <span>JS</span>
+          </label>
+          <label>
+            <input type='checkbox' value='react' onChange={handleChangeInput} name='technologies' />
+            <span>React</span>
+          </label>
+        </div>
         <label>
           <input type='checkbox' checked={applyFormData.agree} value='info' onChange={handleChangeInput} name='agree' />
           <span>Agree with rules!</span>
@@ -74,6 +100,7 @@ const ApplyForm = () => {
           <input type='checkbox' checked={applyFormData.rules} value='correct' onChange={handleChangeInput} name='rules' />
           <span>Accept own rules</span>
         </label>
+
         <button disabled={!applyFormData.agree}>Apply</button>
       </form>
     </div>
