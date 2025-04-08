@@ -1,8 +1,8 @@
-const Header = () => {
+const Header = ({ logout }) => {
   return (
     <header>
       <h2>Forms</h2>
-      <h2>Module 3 Part 2</h2>
+      <button onClick={logout}>Logout</button>
     </header>
   );
 };

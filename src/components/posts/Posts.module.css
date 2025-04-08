@@ -1,0 +1,27 @@
+.list{
+  display: flex;
+
+  flex-direction: column;
+  gap: 15px;
+  width: 90%;
+  margin: 0 auto;
+  li {
+    list-style: none;
+    box-shadow: 2px 2px 4px 4px lightgray;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+  }
+}
+
+.formWrapper{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.form{
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+}
