@@ -1,3 +1,4 @@
+import FormikApplyForm from './components/forms/FormikApplyForm';
 import FormikRegisterForm from './components/forms/FormikRegisterForm';
 import Header from './components/header/Header';
 
@@ -15,7 +16,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <FormikRegisterForm />
+      <FormikApplyForm />
     </>
   );
 };

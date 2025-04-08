@@ -14,9 +14,9 @@ const FormikRegisterForm = () => {
   };
   const re = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i;
   const registerSchema = Yup.object().shape({
-    name: Yup.string().required('This field is Required'),
+    name: Yup.string().required('This field is Required '),
     email: Yup.string().matches(re, 'Is not email').required(),
-    password: Yup.string().min(6, 'Min 6 chars.').max(12, 'Max 12 chars.').required(),
+    password: Yup.string().min(6, 'Min 6 chars.').max(12).required(),
   });
   return (
     <div className={s.formWrapper}>
