@@ -1,6 +1,4 @@
-import ApplyForm from './components/forms/ApplyForm';
-import ControlledRegisterForm from './components/forms/ControlledRegisterForm';
-// import UncontrolledForm from './components/forms/UncontrolledForm';
+import FormikRegisterForm from './components/forms/FormikRegisterForm';
 import Header from './components/header/Header';
 
 const App = () => {
@@ -17,6 +15,7 @@ const App = () => {
   return (
     <>
       <Header />
+      <FormikRegisterForm />
     </>
   );
 };

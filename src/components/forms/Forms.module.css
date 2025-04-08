@@ -22,6 +22,10 @@
       padding: 5px;
       border-radius: 4px;
     }
+    .error{
+      color:red;
+      font-size: 14px;
+    }
   }
   button{
     padding: 10px 15px;
