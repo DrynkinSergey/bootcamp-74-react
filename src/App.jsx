@@ -17,9 +17,6 @@ const App = () => {
   return (
     <>
       <Header />
-      {/* <UncontrolledForm register={register} /> */}
-      {/* <ControlledRegisterForm register={register} /> */}
-      <ApplyForm />
     </>
   );
 };

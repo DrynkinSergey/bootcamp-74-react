@@ -9,13 +9,19 @@ const INITIAL_VALUES = {
   level: 'junior',
   agree: false,
   rules: false,
-  technologies: '',
+  technologies: {
+    css: false,
+    react: false,
+    js: false,
+  },
 };
 const ApplyForm = () => {
   const [applyFormData, setApplyFormData] = useState(INITIAL_VALUES);
   const handleSubmit = e => {
     e.preventDefault();
-    console.log({ ...applyFormData });
+    const selectedTechnologies = Object.keys(applyFormData.technologies).filter(tech => applyFormData.technologies[tech]);
+    console.log({ ...applyFormData, selectedTechnologies });
+
     setApplyFormData(INITIAL_VALUES);
   };
 
@@ -80,15 +86,15 @@ const ApplyForm = () => {
         </div>
         <div>
           <label>
-            <input type='checkbox' value='css' onChange={handleChangeInput} name='technologies' />
+            <input type='checkbox' value='css' checked={applyFormData.technologies.css} onChange={handleChangeInput} name='technologies' />
             <span>CSS</span>
           </label>
           <label>
-            <input type='checkbox' value='js' onChange={handleChangeInput} name='technologies' />
+            <input type='checkbox' value='js' onChange={handleChangeInput} name='technologies' checked={applyFormData.technologies.js} />
             <span>JS</span>
           </label>
           <label>
-            <input type='checkbox' value='react' onChange={handleChangeInput} name='technologies' />
+            <input type='checkbox' value='react' onChange={handleChangeInput} name='technologies' checked={applyFormData.technologies.react} />
             <span>React</span>
           </label>
         </div>
