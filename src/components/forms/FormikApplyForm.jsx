@@ -1,6 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import s from './Forms.module.css';
 import * as Yup from 'yup';
+import CustomInput from './CustomInput';
 const FormikApplyForm = () => {
   const handleSubmit = (values, options) => {
     const technologies = Object.keys(values.technologies).filter(value => values.technologies[value]);
@@ -37,21 +38,9 @@ const FormikApplyForm = () => {
     <div className={s.formWrapper}>
       <Formik validationSchema={applyValidationSchema} onSubmit={handleSubmit} initialValues={initialValues}>
         <Form>
-          <label>
-            <span>Name:</span>
-            <Field name='name' />
-            <ErrorMessage name='name' component='p' className={s.error} />
-          </label>
-          <label>
-            <span>Email:</span>
-            <Field name='email' />
-            <ErrorMessage name='email' component='p' className={s.error} />
-          </label>
-          <label>
-            <span>Age:</span>
-            <Field name='age' type='number' />
-            <ErrorMessage name='age' component='p' className={s.error} />
-          </label>
+          <CustomInput name='name' s={s} label='Name from custom:' />
+          <CustomInput name='email' s={s} label='Email:' />
+          <CustomInput name='age' type='number' s={s} label='Age:' />
           <label>
             <span>About:</span>
             <Field as='textarea' name='about' />
