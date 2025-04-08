@@ -30,7 +30,7 @@ const FormikApplyForm = () => {
     specification: Yup.string().oneOf(['backend', 'frontend', 'fullstack']).required(),
     level: Yup.string().oneOf(['junior', 'middle']),
     agree: Yup.boolean().oneOf([true]).required(),
-    technologies: Yup.object().test('at-least-one-active', 'Minimum 1 tech', value => Object.values(value).some(value => value === true)),
+    technologies: Yup.object().test(null, 'Minimum 1 tech', value => Object.values(value).some(value => value === true)),
   });
 
   return (
