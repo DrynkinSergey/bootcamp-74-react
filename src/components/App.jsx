@@ -1,8 +1,8 @@
-import UseMemoExample from './components/UseMemoExample';
-import UseRefRenderCountExample from './components/UseRefRenderCountExample';
-import UseRefInputFile from './components/UseRefInputFile';
-import UseContextExample from './components/UseContextExample/UseContextExample';
-import Header from './components/header/Header';
+import UseMemoExample from './UseMemoExample';
+import UseRefRenderCountExample from './UseRefRenderCountExample';
+import UseRefInputFile from './UseRefInputFile';
+import UseContextExample from './UseContextExample/UseContextExample';
+import Header from './header/Header';
 
 const App = () => {
   return (
