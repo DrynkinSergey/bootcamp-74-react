@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 import s from './Modal.module.css';
-import useKeyDown from '../../hooks/useKeyDown';
-import toast from 'react-hot-toast';
 const Modal = ({ children, title = 'Default modal', onClose }) => {
   const handleBackdropClick = e => {
     if (e.target === e.currentTarget) {
@@ -20,7 +18,6 @@ const Modal = ({ children, title = 'Default modal', onClose }) => {
     };
   }, [onClose]);
 
-  useKeyDown(() => toast.success('HOOK USE KEYDOWN'), 'h');
   return (
     <div onClick={handleBackdropClick} className={s.wrapper}>
       <div className={s.content}>
