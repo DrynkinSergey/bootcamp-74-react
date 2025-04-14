@@ -20,6 +20,7 @@ const About = () => {
       </nav>
       <div>
         <Outlet />
+        {/* {children} */}
       </div>
     </div>
   );
