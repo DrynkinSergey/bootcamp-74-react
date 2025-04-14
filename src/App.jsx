@@ -1,27 +1,44 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Header from './components/header/Header';
+import Home from './pages/home/Home';
+import About from './pages/about/About';
+import NotFound from './pages/notFound/NotFound';
+import Company from './components/nestedRoutes/Company';
+import Aim from './components/nestedRoutes/Aim';
+import Team from './components/nestedRoutes/Team';
+import Users from './pages/users/Users';
+import UserDetails from './pages/userDetails/UserDetails';
+import UserPosts from './components/nestedRoutes/UserPosts';
+import PostDetails from './components/nestedRoutes/PostDetails';
 
-function App() {
-  const [count, setCount] = useState(0);
+const App = () => {
   return (
-    <>
-      <div>
-        <a href='https://vite.dev' target='_blank'>
-          <img src={viteLogo} className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://react.dev' target='_blank'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount(count => count + 1)}>count is {count}</button>
-      </div>
-      <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
-    </>
-  );
-}
+    <div>
+      <Header />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        {/* http://localhost/about/company */}
+        {/* http://localhost/about/aim */}
+        {/* http://localhost/about/team */}
 
+        <Route path='/about' element={<About />}>
+          <Route path='company' element={<Company />} />
+          <Route path='aim' element={<Aim />} />
+          <Route path='team' element={<Team />} />
+        </Route>
+
+        <Route path='/users' element={<Users />} />
+        <Route path='/users/:userId' element={<UserDetails />}>
+          <Route path='info' element={<h2>More information....</h2>} />
+          <Route path='posts' element={<UserPosts />}>
+            <Route path=':postId' element={<PostDetails />} />
+            {/* http://localhost/users/1/posts/555 -> params = {userId, postId} */}
+          </Route>
+        </Route>
+
+        <Route path='*' element={<NotFound />} />
+      </Routes>
+    </div>
+  );
+};
 export default App;

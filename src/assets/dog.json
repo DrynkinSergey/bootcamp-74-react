@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Dog1",
+    "phone": "+1-1231233-1234",
+    "email": "whiskerson@catmail.com",
+    "image": "https://cataas.com/cat/says/Hello"
+  },
+  {
+    "name": "Dog4",
+    "phone": "+1-11231-1234",
+    "email": "pouncealot@catmail.com",
+    "image": "https://cataas.com/cat/says/Meow"
+  },
+  {
+    "name": "Dog2",
+    "phone": "+1-55555-9012",
+    "email": "meowzilla@catmail.com",
+    "image": "https://cataas.com/cat/says/Roar"
+  }
+]

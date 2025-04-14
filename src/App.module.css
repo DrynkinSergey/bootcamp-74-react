@@ -1,0 +1,37 @@
+.box{
+  width: 200px;
+  height: 200px;
+  background-color: black;
+  box-shadow: 0 0 10px 10px black;
+  border: 2px solid gold;
+  &:hover{
+    background-color: white;
+  }
+}
+
+.boxRed{
+  composes: box;
+  background-color: red;
+  width: 300px;
+  &:hover{
+    background-color: gold;
+  }
+}
+
+
+.flex{
+display: flex;
+gap:20px;
+padding: 20px;
+}
+.list{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  padding: 0;
+  gap:20px;
+
+  li{
+    margin: 0;
+    list-style: none;
+  }
+}
