@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Users = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -21,7 +21,7 @@ const Users = () => {
     <div>
       <h2>Users CRM</h2>
       <ul>
-        {users.map(user => (
+        {users?.map(user => (
           // localhost:5173/users/1
           // localhost:5173/users/4
           // localhost:5173/users/40

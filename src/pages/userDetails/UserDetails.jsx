@@ -20,6 +20,9 @@ const UserDetails = () => {
     getData();
   }, [userId]);
 
+  if (!user) {
+    return <h2>Loading...</h2>;
+  }
   return (
     <div>
       <h2>User details #{userId}</h2>
