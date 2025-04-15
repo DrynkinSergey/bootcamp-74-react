@@ -1,10 +1,14 @@
-import { useEffect, useState } from 'react';
-import { NavLink, Outlet, useParams } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Link, NavLink, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getUserById } from '../../services/api';
 
 const UserDetails = () => {
   // localhost:5173/users/:userId -> {userId:5}
   const { userId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const goBackRef = useRef(location.state ?? '/users');
+  console.log(location);
 
   const [user, setUser] = useState({});
 
@@ -25,6 +29,7 @@ const UserDetails = () => {
   }
   return (
     <div>
+      <Link to={goBackRef.current}>Go back</Link>
       <h2>User details #{userId}</h2>
       <img src={user.image} />
       <h3>
