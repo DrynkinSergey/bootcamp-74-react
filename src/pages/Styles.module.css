@@ -1,0 +1,16 @@
+.recipe_wrapper{
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  padding: 0 20px;
+  section{
+    & > img{
+      width: 100%;
+      height: auto;
+    }
+  }
+  .nav{
+    display: flex;
+    gap:20px;
+  }
+}

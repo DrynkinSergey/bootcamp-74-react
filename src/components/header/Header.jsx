@@ -8,7 +8,14 @@ const Header = () => {
   return (
     <header>
       <h2>Routing </h2>
-      <nav className={s.nav}></nav>
+      <nav className={s.nav}>
+        <NavLink className={setActiveClass} to='/'>
+          Home
+        </NavLink>
+        <NavLink className={setActiveClass} to='/recipes'>
+          Recipes
+        </NavLink>
+      </nav>
     </header>
   );
 };
