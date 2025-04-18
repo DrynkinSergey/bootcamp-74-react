@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import AddForm from './AddForm';
 import { nanoid } from '@reduxjs/toolkit';
-import { addTodo, changeFilter, deleteTodo } from '../../redux/actions';
 import toast from 'react-hot-toast';
+import { addTodo, deleteTodo, changeFilter } from '../../redux/todoSlice';
 
 const TodoList = () => {
   const todos = useSelector(state => state.todos.todos);
