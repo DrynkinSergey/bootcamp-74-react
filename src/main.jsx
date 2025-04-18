@@ -5,13 +5,17 @@ import './styles.css';
 import { Toaster } from 'react-hot-toast';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { store } from './redux/store.js';
+import { persistor, store } from './redux/store.js';
+import { PersistGate } from 'redux-persist/integration/react';
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Provider store={store}>
-      <App />
-      <Toaster />
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+
+        <Toaster />
+      </PersistGate>
     </Provider>
   </BrowserRouter>
 );
