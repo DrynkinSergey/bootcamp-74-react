@@ -10,8 +10,8 @@ const TodoList = () => {
 
   const dispatch = useDispatch();
 
-  const handleAddTodo = ({ todo, author }) => {
-    if (!todo || !author) {
+  const handleAddTodo = ({ todo }) => {
+    if (!todo) {
       return toast.error('Data is not full');
     }
     const isExist = todos.some(item => item.todo === todo);
@@ -22,7 +22,6 @@ const TodoList = () => {
       id: nanoid(),
       completed: false,
       todo: todo,
-      author: author,
     };
     dispatch(addTodo(newTodoObj));
   };
