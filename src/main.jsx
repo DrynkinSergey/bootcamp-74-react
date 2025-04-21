@@ -5,10 +5,13 @@ import './styles.scss';
 import { Toaster } from 'react-hot-toast';
 import { Provider } from 'react-redux';
 import { store } from './redux/store.js';
+import { StrictMode } from 'react';
 
 createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <App />
-    <Toaster />
-  </Provider>
+  <StrictMode>
+    <Provider store={store}>
+      <App />
+      <Toaster />
+    </Provider>
+  </StrictMode>
 );

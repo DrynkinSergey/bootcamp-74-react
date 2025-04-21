@@ -18,9 +18,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://6805ee0eca467c15be6a7236.mockapi.io';
 
-export const fetchTodos = createAsyncThunk('fetchTodos', async (_, thunkAPI) => {
+export const fetchTodos = createAsyncThunk('fetchTodos', async (signal, thunkAPI) => {
   try {
-    const response = await axios.get('/tasks');
+    const response = await axios.get('/tasks', {
+      signal,
+    });
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -31,6 +33,33 @@ export const deleteTodoThunk = createAsyncThunk('deleteTodo', async (id, thunkAP
   try {
     await axios.delete(`/tasks/${id}`);
     return id;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const addTodoThunk = createAsyncThunk('addTodo', async (body, thunkAPI) => {
+  try {
+    const response = await axios.post('/tasks', body);
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const toggleCompletedTodoThunk = createAsyncThunk('toggleCompleted', async ({ id, ...body }, thunkAPI) => {
+  try {
+    const response = await axios.put(`/tasks/${id}`, body);
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const changeTitleThunk = createAsyncThunk('changeTitle', async ({ id, ...body }, thunkAPI) => {
+  try {
+    const response = await axios.put(`/tasks/${id}`, body);
+    return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

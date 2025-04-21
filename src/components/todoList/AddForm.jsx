@@ -12,6 +12,7 @@ const AddForm = ({ handleAddTodo }) => {
     handleAddTodo(values);
     options.resetForm();
   };
+
   return (
     <div>
       <Formik validationSchema={validationSchema} initialValues={initialValues} onSubmit={handleSubmit}>

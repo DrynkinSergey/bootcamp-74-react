@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 import AddForm from './AddForm';
-import { nanoid } from '@reduxjs/toolkit';
 import toast from 'react-hot-toast';
-import { addTodo, deleteTodo, changeFilter } from '../../redux/todoSlice';
-import { deleteTodoThunk } from '../../redux/operations';
+import { changeFilter } from '../../redux/todoSlice';
+import { addTodoThunk, changeTitleThunk, deleteTodoThunk, toggleCompletedTodoThunk } from '../../redux/operations';
 
 const TodoList = () => {
   const todos = useSelector(state => state.todos.todos);
@@ -21,11 +20,21 @@ const TodoList = () => {
       return toast.error('This value already exist!');
     }
     const newTodoObj = {
-      id: nanoid(),
-      completed: false,
       todo: todo,
     };
-    dispatch(addTodo(newTodoObj));
+    dispatch(addTodoThunk(newTodoObj));
+  };
+
+  const handleToggleTodoCompleted = body => {
+    dispatch(toggleCompletedTodoThunk({ ...body, completed: !body.completed }));
+  };
+
+  const handleRenameTodo = body => {
+    const text = prompt('Enter new value:');
+    if (!text.trim()) {
+      return toast.error('Enter correct new value');
+    }
+    dispatch(changeTitleThunk({ ...body, todo: text }));
   };
 
   const filteredData = todos.filter(item => item.todo.toLowerCase().includes(filter.toLowerCase()));
@@ -36,7 +45,9 @@ const TodoList = () => {
       <ul>
         {filteredData.map(item => (
           <li key={item.id}>
+            <input type='checkbox' checked={item.completed} onChange={() => handleToggleTodoCompleted(item)} />
             <h2>{item.todo}</h2>
+            <button onClick={() => handleRenameTodo(item)}>Edit</button>
             <button onClick={() => dispatch(deleteTodoThunk(item.id))}>Delete</button>
           </li>
         ))}

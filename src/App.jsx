@@ -8,7 +8,12 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchTodos());
+    const controller = new AbortController();
+    dispatch(fetchTodos(controller.signal));
+
+    return () => {
+      controller.abort();
+    };
   }, [dispatch]);
   return (
     <div>
