@@ -9,11 +9,11 @@ const typeOptions = [
   { value: 'income', label: 'Income' },
   { value: 'expense', label: 'Expense' },
 ];
-const TransactionForm = ({ initialValues, handleSubmit }) => {
+const TransactionForm = ({ initialValues, handleSubmit, isEdit }) => {
   const categories = useSelector(selectCategories);
   return (
     <div className='min-h-[90vh]  flex  items-center justify-center'>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
         {({ setFieldValue, values }) => (
           <Form className='flex p-4 shadow-xl flex-col gap-4 max-w-xl w-full'>
             <label className='flex flex-col gap-1'>
@@ -26,11 +26,23 @@ const TransactionForm = ({ initialValues, handleSubmit }) => {
             </label>
             <label className='flex flex-col gap-1'>
               <span>Type</span>
-              <Select options={typeOptions} className='w-full' name='type' onChange={option => setFieldValue('type', option.value)} />
+              <Select
+                defaultValue={values.category ? typeOptions.find(item => item.value === values?.type) : typeOptions[0]}
+                options={typeOptions}
+                className='w-full'
+                name='type'
+                onChange={option => setFieldValue('type', option.value)}
+              />
             </label>
             <label className='flex flex-col gap-1'>
               <span>Category</span>
-              <Select options={categories} className='w-full' name='category' onChange={option => setFieldValue('category', option.value)} />
+              <Select
+                defaultValue={values.category ? categories.find(item => item.value === values?.category) : categories[0]}
+                options={categories}
+                className='w-full'
+                name='category'
+                onChange={option => setFieldValue('category', option.value)}
+              />
             </label>
             <label className='flex flex-col gap-1'>
               <span>Amount</span>
@@ -50,7 +62,7 @@ const TransactionForm = ({ initialValues, handleSubmit }) => {
               />
             </label>
             <button type='submit' className='btn btn-outline btn-primary'>
-              Add
+              {isEdit ? 'Edit' : 'Add'} transaction
             </button>
             <Link to='/transactions' className='btn btn-outline btn-ghost'>
               Cancel

@@ -18,3 +18,21 @@ export const addTransactionThunk = createAsyncThunk('addTransaction', async (bod
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+export const editTransactionThunk = createAsyncThunk('editTransaction', async ({ id, ...body }, thunkAPI) => {
+  try {
+    const response = await myApi.put(`/transactions/${id}`, body);
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const deleteTransactionThunk = createAsyncThunk('deleteTransaction', async (id, thunkAPI) => {
+  try {
+    await myApi.delete(`/transactions/${id}`);
+    return id;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});

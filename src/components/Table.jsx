@@ -1,8 +1,14 @@
 import clsx from 'clsx';
 import { format } from 'date-fns';
-import { X } from 'lucide-react';
+import { Pencil, X } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { deleteTransactionThunk } from '../redux/transactionsOps';
+import { useNavigate } from 'react-router-dom';
 
 const Table = ({ transactions }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const filteredByDateTransactions = transactions.toSorted((a, b) => new Date(b.date) - new Date(a.date));
   return (
     <div>
       <div className='overflow-x-auto px-10 rounded-box border border-base-content/5 bg-base-100'>
@@ -21,7 +27,7 @@ const Table = ({ transactions }) => {
             </tr>
           </thead>
           <tbody>
-            {transactions.map((item, idx) => (
+            {filteredByDateTransactions.map((item, idx) => (
               <tr className={clsx(item.type === 'expense' ? 'bg-red-100' : 'bg-green-200')} key={item.id}>
                 <th>{idx + 1}</th>
                 <td>{item.title}</td>
@@ -31,7 +37,12 @@ const Table = ({ transactions }) => {
                 <td>{format(item.date, 'dd MMMM yyyy')}</td>
                 <td>{item.amount}</td>
                 <td>
-                  <X />
+                  <button onClick={() => dispatch(deleteTransactionThunk(item.id))} className='btn btn-error'>
+                    <X />
+                  </button>
+                  <button onClick={() => navigate(`/transactions/edit/${item.id}`)} className='btn btn-primary'>
+                    <Pencil />
+                  </button>
                 </td>
               </tr>
             ))}
