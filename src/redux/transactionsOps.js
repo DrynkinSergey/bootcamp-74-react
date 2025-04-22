@@ -9,3 +9,12 @@ export const fetchTransactions = createAsyncThunk('fetchAllTransactions', async 
     return thunkAPI.rejectWithValue(error.message);
   }
 });
+
+export const addTransactionThunk = createAsyncThunk('addTransaction', async (body, thunkAPI) => {
+  try {
+    const response = await myApi.post('/transactions', body);
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});

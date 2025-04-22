@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchTransactions } from './transactionsOps';
+import { addTransactionThunk, fetchTransactions } from './transactionsOps';
 
 const initialState = {
   items: [],
@@ -9,9 +9,13 @@ const slice = createSlice({
   name: 'transactions',
   initialState,
   extraReducers: builder => {
-    builder.addCase(fetchTransactions.fulfilled, (state, action) => {
-      state.items = action.payload;
-    });
+    builder
+      .addCase(fetchTransactions.fulfilled, (state, action) => {
+        state.items = action.payload;
+      })
+      .addCase(addTransactionThunk.fulfilled, (state, action) => {
+        state.items.push(action.payload);
+      });
   },
 });
 
