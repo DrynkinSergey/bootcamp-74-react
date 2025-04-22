@@ -1,9 +1,10 @@
-import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { createSelector, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { addTodoThunk, changeTitleThunk, deleteTodoThunk, fetchTodos, toggleCompletedTodoThunk } from './operations';
 
 const initialState = {
   todos: [],
   filter: '',
+  selectedTab: 'all',
   isError: false,
   isLoading: false,
 };
@@ -14,6 +15,9 @@ const slice = createSlice({
   reducers: {
     changeFilter: (state, action) => {
       state.filter = action.payload;
+    },
+    changeSelectedTab: (state, action) => {
+      state.selectedTab = action.payload;
     },
   },
 
@@ -70,4 +74,51 @@ const slice = createSlice({
 });
 
 export const todoReducer = slice.reducer;
-export const { changeFilter } = slice.actions;
+export const { changeFilter, changeSelectedTab } = slice.actions;
+
+export const selectTodos = state => state.todos.todos;
+export const selectFilter = state => state.todos.filter;
+export const selectIsLoading = state => state.todos.isLoading;
+export const selectIsError = state => state.todos.isError;
+export const selectTab = state => state.todos.selectedTab;
+
+export const selectTodosByTab = state => {
+  const todos = selectTodos(state);
+  const tab = selectTab(state);
+  console.log('SELECT LOGIC');
+  switch (tab) {
+    case 'active':
+      return todos.filter(item => !item.completed);
+    case 'completed':
+      return todos.filter(item => item.completed);
+
+    default:
+      return todos;
+  }
+};
+
+export const selectTodosByTabMemo = createSelector([selectTodos, selectTab], (todos, tab) => {
+  console.log('SELECT LOGIC');
+
+  switch (tab) {
+    case 'active':
+      return todos.filter(item => !item.completed);
+    case 'completed':
+      return todos.filter(item => item.completed);
+
+    default:
+      return todos;
+  }
+});
+
+export const selectUncompletedTodos = state => {
+  console.log('UNCOMPLETE COUNT LOGIC');
+
+  const todos = selectTodos(state);
+  return todos.reduce((total, curr) => !curr.completed && total + 1, 0);
+};
+
+export const selectUncompletedTodosMemo = createSelector([selectTodos], todos => {
+  console.log('UNCOMPLETE COUNT LOGIC');
+  return todos.reduce((total, curr) => (!curr.completed ? total + 1 : total), 0);
+});

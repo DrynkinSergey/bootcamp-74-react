@@ -1,14 +1,27 @@
 import { useDispatch, useSelector } from 'react-redux';
 import AddForm from './AddForm';
 import toast from 'react-hot-toast';
-import { changeFilter } from '../../redux/todoSlice';
+import {
+  changeFilter,
+  selectFilter,
+  selectIsError,
+  selectIsLoading,
+  selectTab,
+  selectTodos,
+  selectTodosByTab,
+  selectTodosByTabMemo,
+  selectUncompletedTodos,
+  selectUncompletedTodosMemo,
+} from '../../redux/todoSlice';
 import { addTodoThunk, changeTitleThunk, deleteTodoThunk, toggleCompletedTodoThunk } from '../../redux/operations';
+import Filter from '../filter/Filter';
 
 const TodoList = () => {
-  const todos = useSelector(state => state.todos.todos);
-  const filter = useSelector(state => state.todos.filter);
-  const isLoading = useSelector(state => state.todos.isLoading);
-  const isError = useSelector(state => state.todos.isError);
+  const todos = useSelector(selectTodosByTabMemo);
+  const filter = useSelector(selectFilter);
+  const isLoading = useSelector(selectIsLoading);
+  const isError = useSelector(selectIsError);
+  const uncompletedTasks = useSelector(selectUncompletedTodosMemo);
   const dispatch = useDispatch();
 
   const handleAddTodo = ({ todo }) => {
@@ -38,12 +51,15 @@ const TodoList = () => {
   };
 
   const filteredData = todos.filter(item => item.todo.toLowerCase().includes(filter.toLowerCase()));
+
   return (
     <div>
       <AddForm handleAddTodo={handleAddTodo} />
       <input value={filter} onChange={e => dispatch(changeFilter(e.target.value))} placeholder='Enter any value for search' />
+      <Filter />
+      <h2>Uncompleted: {uncompletedTasks}</h2>
       <ul>
-        {filteredData.map(item => (
+        {todos.map(item => (
           <li key={item.id}>
             <input type='checkbox' checked={item.completed} onChange={() => handleToggleTodoCompleted(item)} />
             <h2>{item.todo}</h2>
@@ -53,7 +69,7 @@ const TodoList = () => {
         ))}
       </ul>
       {isLoading && <h2>Loading...</h2>}
-      {isError && <h2>{isError}</h2>}
+      {/* {isError && <h2>{isError}</h2>} */}
     </div>
   );
 };
