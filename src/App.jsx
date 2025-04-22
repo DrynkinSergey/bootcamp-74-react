@@ -6,8 +6,15 @@ import AddTransaction from './pages/AddTransaction';
 import EditTransaction from './pages/EditTransaction';
 import Statistics from './pages/Statistics';
 import NotFound from './pages/NotFound';
+import { useDispatch } from 'react-redux';
+import { fetchTransactions } from './redux/transactionsOps';
+import { useEffect } from 'react';
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTransactions());
+  }, [dispatch]);
   return (
     <div>
       <Header />
