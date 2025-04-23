@@ -1,7 +1,7 @@
 const Header = () => {
   return (
     <header>
-      <h2>Selectors </h2>
+      <h2>Auth </h2>
     </header>
   );
 };

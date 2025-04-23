@@ -1,18 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import AddForm from './AddForm';
 import toast from 'react-hot-toast';
-import {
-  changeFilter,
-  selectFilter,
-  selectIsError,
-  selectIsLoading,
-  selectTab,
-  selectTodos,
-  selectTodosByTab,
-  selectTodosByTabMemo,
-  selectUncompletedTodos,
-  selectUncompletedTodosMemo,
-} from '../../redux/todoSlice';
+import { changeFilter, selectFilter, selectIsError, selectIsLoading, selectTodosByTabMemo, selectUncompletedTodosMemo } from '../../redux/todoSlice';
 import { addTodoThunk, changeTitleThunk, deleteTodoThunk, toggleCompletedTodoThunk } from '../../redux/operations';
 import Filter from '../filter/Filter';
 
@@ -50,12 +39,9 @@ const TodoList = () => {
     dispatch(changeTitleThunk({ ...body, todo: text }));
   };
 
-  const filteredData = todos.filter(item => item.todo.toLowerCase().includes(filter.toLowerCase()));
-
   return (
     <div>
       <AddForm handleAddTodo={handleAddTodo} />
-      <input value={filter} onChange={e => dispatch(changeFilter(e.target.value))} placeholder='Enter any value for search' />
       <Filter />
       <h2>Uncompleted: {uncompletedTasks}</h2>
       <ul>
@@ -69,7 +55,6 @@ const TodoList = () => {
         ))}
       </ul>
       {isLoading && <h2>Loading...</h2>}
-      {/* {isError && <h2>{isError}</h2>} */}
     </div>
   );
 };
