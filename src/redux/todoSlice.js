@@ -1,5 +1,6 @@
 import { createSelector, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { addTodoThunk, changeTitleThunk, deleteTodoThunk, fetchTodos, toggleCompletedTodoThunk } from './operations';
+import { logoutThunk } from './auth/operations';
 
 const initialState = {
   todos: [],
@@ -43,6 +44,7 @@ const slice = createSlice({
           item.todo = action.payload.todo;
         }
       })
+      .addCase(logoutThunk.fulfilled, () => initialState)
       //
       .addMatcher(
         isAnyOf(changeTitleThunk.pending, addTodoThunk.pending, toggleCompletedTodoThunk.pending, deleteTodoThunk.pending, fetchTodos.pending),

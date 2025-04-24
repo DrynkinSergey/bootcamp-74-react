@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from 'formik';
 
-const RegisterForm = () => {
+const RegisterForm = ({ onSubmit }) => {
   const initialValues = {
     email: '',
     name: '',
@@ -8,6 +8,7 @@ const RegisterForm = () => {
   };
   const handleSubmit = (values, options) => {
     console.log(values);
+    onSubmit(values);
     options.resetForm();
   };
   return (

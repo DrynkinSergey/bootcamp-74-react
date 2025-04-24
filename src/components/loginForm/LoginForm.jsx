@@ -1,12 +1,13 @@
 import { Field, Form, Formik } from 'formik';
 
-const LoginForm = () => {
+const LoginForm = ({ onSubmit }) => {
   const initialValues = {
     email: '',
     password: '',
   };
   const handleSubmit = (values, options) => {
     console.log(values);
+    onSubmit(values);
     options.resetForm();
   };
   return (
