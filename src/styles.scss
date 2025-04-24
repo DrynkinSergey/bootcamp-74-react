@@ -114,3 +114,32 @@ img {
   background-color: orange;
   padding: 20px;
 }
+
+.formWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.form {
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  box-shadow: 0 0 4px 4px lightgray;
+  & > label {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    & input {
+      padding: 5px;
+      border-radius: 4px;
+    }
+  }
+  & > button {
+    padding: 10px 15px;
+    background-color: teal;
+    color: white;
+  }
+}

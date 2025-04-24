@@ -14,7 +14,7 @@ const AddForm = ({ handleAddTodo }) => {
   };
 
   return (
-    <div>
+    <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
       <Formik validationSchema={validationSchema} initialValues={initialValues} onSubmit={handleSubmit}>
         <Form>
           <Field name='todo' />

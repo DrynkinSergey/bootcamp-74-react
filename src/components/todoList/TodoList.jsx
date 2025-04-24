@@ -1,15 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import AddForm from './AddForm';
 import toast from 'react-hot-toast';
-import { changeFilter, selectFilter, selectIsError, selectIsLoading, selectTodosByTabMemo, selectUncompletedTodosMemo } from '../../redux/todoSlice';
+import { selectIsLoading, selectTodosByTabMemo, selectUncompletedTodosMemo } from '../../redux/todoSlice';
 import { addTodoThunk, changeTitleThunk, deleteTodoThunk, toggleCompletedTodoThunk } from '../../redux/operations';
 import Filter from '../filter/Filter';
 
 const TodoList = () => {
   const todos = useSelector(selectTodosByTabMemo);
-  const filter = useSelector(selectFilter);
   const isLoading = useSelector(selectIsLoading);
-  const isError = useSelector(selectIsError);
   const uncompletedTasks = useSelector(selectUncompletedTodosMemo);
   const dispatch = useDispatch();
 
@@ -46,11 +44,24 @@ const TodoList = () => {
       <h2>Uncompleted: {uncompletedTasks}</h2>
       <ul>
         {todos.map(item => (
-          <li key={item.id}>
+          <li
+            style={{
+              display: 'flex',
+              border: '1px solid black',
+              justifyContent: 'space-between',
+              width: '70%',
+              margin: '0 auto',
+              alignItems: 'center',
+              padding: 20,
+            }}
+            key={item.id}
+          >
             <input type='checkbox' checked={item.completed} onChange={() => handleToggleTodoCompleted(item)} />
             <h2>{item.todo}</h2>
-            <button onClick={() => handleRenameTodo(item)}>Edit</button>
-            <button onClick={() => dispatch(deleteTodoThunk(item.id))}>Delete</button>
+            <div>
+              <button onClick={() => handleRenameTodo(item)}>Edit</button>
+              <button onClick={() => dispatch(deleteTodoThunk(item.id))}>Delete</button>
+            </div>
           </li>
         ))}
       </ul>
