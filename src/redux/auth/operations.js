@@ -7,9 +7,14 @@ export const goitApi = axios.create({
   baseURL: 'https://task-manager-api.goit.global',
 });
 
+const setAuthHeader = token => {
+  goitApi.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
 export const registerThunk = createAsyncThunk('register', async (credentials, thunkAPI) => {
   try {
     const response = await goitApi.post('/users/signup', credentials);
+    setAuthHeader(response.data.token);
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -19,6 +24,7 @@ export const registerThunk = createAsyncThunk('register', async (credentials, th
 export const loginThunk = createAsyncThunk('login', async (credentials, thunkAPI) => {
   try {
     const response = await goitApi.post('/users/login', credentials);
+    setAuthHeader(response.data.token);
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -26,14 +32,9 @@ export const loginThunk = createAsyncThunk('login', async (credentials, thunkAPI
 });
 
 export const logoutThunk = createAsyncThunk('logout', async (_, thunkAPI) => {
-  console.log(thunkAPI.getState());
-
   try {
-    await goitApi.post('/users/logout', null, {
-      headers: {
-        Authorization: thunkAPI.getState().auth.token,
-      },
-    });
+    await goitApi.post('/users/logout');
+    setAuthHeader('');
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

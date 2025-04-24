@@ -3,6 +3,7 @@ import { loginThunk, logoutThunk, registerThunk } from './operations';
 
 const initialState = {
   isLoggedIn: false,
+  isError: false,
   user: {
     name: '',
     email: '',
@@ -27,6 +28,9 @@ const slice = createSlice({
       })
       .addCase(logoutThunk.fulfilled, (state, action) => {
         return initialState;
+      })
+      .addCase(logoutThunk.rejected, (state, action) => {
+        state.isError = action.payload;
       });
   },
 });
