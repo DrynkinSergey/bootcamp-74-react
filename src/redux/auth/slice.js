@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginThunk, logoutThunk, registerThunk } from './operations';
+import { loginThunk, logoutThunk, refreshUserThunk, registerThunk } from './operations';
 
 const initialState = {
   isLoggedIn: false,
   isError: false,
+  isRefreshing: false,
   user: {
     name: '',
     email: '',
@@ -28,6 +29,17 @@ const slice = createSlice({
       })
       .addCase(logoutThunk.fulfilled, (state, action) => {
         return initialState;
+      })
+      .addCase(refreshUserThunk.pending, state => {
+        state.isRefreshing = true;
+      })
+      .addCase(refreshUserThunk.rejected, state => {
+        state.isRefreshing = false;
+      })
+      .addCase(refreshUserThunk.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
       })
       .addCase(logoutThunk.rejected, (state, action) => {
         state.isError = action.payload;
