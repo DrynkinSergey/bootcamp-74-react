@@ -13,6 +13,7 @@ import { selectIsRefreshing } from './redux/auth/selectors';
 import PrivateRoute from './components/PrivateRoute';
 import RestrictedRoute from './components/RestrictedRoute';
 import PublicRoute from './components/PublicRoute';
+import PostsPage from './pages/Posts/Posts';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const App = () => {
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/posts' element={<PostsPage />} />
         <Route
           path='/tasks'
           element={

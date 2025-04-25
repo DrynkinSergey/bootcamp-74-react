@@ -20,6 +20,9 @@ const Header = () => {
         <NavLink className={({ isActive }) => clsx(s.link, isActive && s.active)} to='/tasks'>
           Tasks
         </NavLink>
+        <NavLink className={({ isActive }) => clsx(s.link, isActive && s.active)} to='/posts'>
+          Posts
+        </NavLink>
         {!isLoggedIn && <AuthNavbar />}
         {isLoggedIn && <button onClick={() => dispatch(logoutThunk())}>logout</button>}
       </nav>
