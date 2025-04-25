@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { goitApi } from './auth/operations';
 
 //https://6805ee0eca467c15be6a7236.mockapi.io/tasks
 //redux-thunk
@@ -16,11 +16,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 //   }
 // };
 
-axios.defaults.baseURL = 'https://6805ee0eca467c15be6a7236.mockapi.io';
+// axios.defaults.baseURL = 'https://6805ee0eca467c15be6a7236.mockapi.io';
 
 export const fetchTodos = createAsyncThunk('fetchTodos', async (signal, thunkAPI) => {
   try {
-    const response = await axios.get('/tasks', {
+    const response = await goitApi.get('/tasks', {
       signal,
     });
     return response.data;
@@ -31,7 +31,7 @@ export const fetchTodos = createAsyncThunk('fetchTodos', async (signal, thunkAPI
 
 export const deleteTodoThunk = createAsyncThunk('deleteTodo', async (id, thunkAPI) => {
   try {
-    await axios.delete(`/tasks/${id}`);
+    await goitApi.delete(`/tasks/${id}`);
     return id;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -40,7 +40,7 @@ export const deleteTodoThunk = createAsyncThunk('deleteTodo', async (id, thunkAP
 
 export const addTodoThunk = createAsyncThunk('addTodo', async (body, thunkAPI) => {
   try {
-    const response = await axios.post('/tasks', body);
+    const response = await goitApi.post('/tasks', body);
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -49,7 +49,7 @@ export const addTodoThunk = createAsyncThunk('addTodo', async (body, thunkAPI) =
 
 export const toggleCompletedTodoThunk = createAsyncThunk('toggleCompleted', async ({ id, ...body }, thunkAPI) => {
   try {
-    const response = await axios.put(`/tasks/${id}`, body);
+    const response = await goitApi.patch(`/tasks/${id}`, body);
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -58,7 +58,7 @@ export const toggleCompletedTodoThunk = createAsyncThunk('toggleCompleted', asyn
 
 export const changeTitleThunk = createAsyncThunk('changeTitle', async ({ id, ...body }, thunkAPI) => {
   try {
-    const response = await axios.put(`/tasks/${id}`, body);
+    const response = await goitApi.patch(`/tasks/${id}`, body);
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);

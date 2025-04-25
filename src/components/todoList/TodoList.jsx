@@ -20,7 +20,7 @@ const TodoList = () => {
       return toast.error('This value already exist!');
     }
     const newTodoObj = {
-      todo: todo,
+      text: todo,
     };
     dispatch(addTodoThunk(newTodoObj));
   };
@@ -34,7 +34,7 @@ const TodoList = () => {
     if (!text.trim()) {
       return toast.error('Enter correct new value');
     }
-    dispatch(changeTitleThunk({ ...body, todo: text }));
+    dispatch(changeTitleThunk({ ...body, text: text }));
   };
 
   return (
@@ -57,7 +57,7 @@ const TodoList = () => {
             key={item.id}
           >
             <input type='checkbox' checked={item.completed} onChange={() => handleToggleTodoCompleted(item)} />
-            <h2>{item.todo}</h2>
+            <h2>{item.text}</h2>
             <div>
               <button onClick={() => handleRenameTodo(item)}>Edit</button>
               <button onClick={() => dispatch(deleteTodoThunk(item.id))}>Delete</button>

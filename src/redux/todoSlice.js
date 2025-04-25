@@ -41,7 +41,7 @@ const slice = createSlice({
       .addCase(changeTitleThunk.fulfilled, (state, action) => {
         const item = state.todos.find(item => item.id === action.payload.id);
         if (item) {
-          item.todo = action.payload.todo;
+          item.text = action.payload.text;
         }
       })
       .addCase(logoutThunk.fulfilled, () => initialState)
