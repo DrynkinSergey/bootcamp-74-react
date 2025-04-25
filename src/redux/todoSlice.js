@@ -27,25 +27,8 @@ const slice = createSlice({
       .addCase(fetchTodos.fulfilled, (state, action) => {
         state.todos = action.payload;
       })
-      .addCase(deleteTodoThunk.fulfilled, (state, action) => {
-        state.todos = state.todos.filter(item => item.id !== action.payload);
-      })
-      .addCase(addTodoThunk.fulfilled, (state, action) => {
-        state.todos.push(action.payload);
-      })
-      .addCase(toggleCompletedTodoThunk.fulfilled, (state, action) => {
-        // state.todos = state.todos.map(item => (item.id === action.payload.id ? action.payload : item));
-        const item = state.todos.find(item => item.id === action.payload.id);
-        item.completed = !item.completed;
-      })
-      .addCase(changeTitleThunk.fulfilled, (state, action) => {
-        const item = state.todos.find(item => item.id === action.payload.id);
-        if (item) {
-          item.text = action.payload.text;
-        }
-      })
+
       .addCase(logoutThunk.fulfilled, () => initialState)
-      //
       .addMatcher(
         isAnyOf(changeTitleThunk.pending, addTodoThunk.pending, toggleCompletedTodoThunk.pending, deleteTodoThunk.pending, fetchTodos.pending),
         state => {

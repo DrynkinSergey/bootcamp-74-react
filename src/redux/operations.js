@@ -32,7 +32,7 @@ export const fetchTodos = createAsyncThunk('fetchTodos', async (signal, thunkAPI
 export const deleteTodoThunk = createAsyncThunk('deleteTodo', async (id, thunkAPI) => {
   try {
     await goitApi.delete(`/tasks/${id}`);
-    return id;
+    thunkAPI.dispatch(fetchTodos());
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -40,8 +40,8 @@ export const deleteTodoThunk = createAsyncThunk('deleteTodo', async (id, thunkAP
 
 export const addTodoThunk = createAsyncThunk('addTodo', async (body, thunkAPI) => {
   try {
-    const response = await goitApi.post('/tasks', body);
-    return response.data;
+    await goitApi.post('/tasks', body);
+    thunkAPI.dispatch(fetchTodos());
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -49,8 +49,8 @@ export const addTodoThunk = createAsyncThunk('addTodo', async (body, thunkAPI) =
 
 export const toggleCompletedTodoThunk = createAsyncThunk('toggleCompleted', async ({ id, ...body }, thunkAPI) => {
   try {
-    const response = await goitApi.patch(`/tasks/${id}`, body);
-    return response.data;
+    await goitApi.patch(`/tasks/${id}`, body);
+    thunkAPI.dispatch(fetchTodos());
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -58,8 +58,8 @@ export const toggleCompletedTodoThunk = createAsyncThunk('toggleCompleted', asyn
 
 export const changeTitleThunk = createAsyncThunk('changeTitle', async ({ id, ...body }, thunkAPI) => {
   try {
-    const response = await goitApi.patch(`/tasks/${id}`, body);
-    return response.data;
+    await goitApi.patch(`/tasks/${id}`, body);
+    thunkAPI.dispatch(fetchTodos());
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
